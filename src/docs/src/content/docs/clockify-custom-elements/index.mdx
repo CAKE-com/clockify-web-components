@@ -1,0 +1,128 @@
+---
+title: Getting started
+description: Custom elements for Clockify
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+# Special web components for Clockify related products
+
+Clockify custom elements are a set of web components that can be used to build custom Clockify integrations. They are built using the [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) standard and can be used in any web application.
+Visit the documentation for more information on how to use them.
+
+## Components
+
+- [clockify-project-picker](components/clockify-project-picker)
+- [clockify-tags](components/clockify-tags)
+- [clockify-billable](components/clockify-billable)
+- [clockify-custom-fields](components/clockify-custom-fields)
+- [clockify-select](components/clockify-select)
+
+## Installation
+
+### Importing from the CDN
+
+First you need to import the base styles from the shoelace components library, which are compiled into a single css file:
+
+```javascript
+<link rel="stylesheet" href="https://resources.developer.clockify.me/validation-widget/latest/style.css" />
+```
+
+Then, if you want to import all the components at once, you can do it like this:
+
+```javascript
+<script type="module" src="https://resources.developer.clockify.me/validation-widget/latest/web-components.js"></script>
+```
+
+Or you can import each component individually:
+
+```javascript
+<script type="module" src="https://resources.developer.clockify.me/validation-widget/latest/clockify-project-picker.js"></script>
+```
+
+Alternatively, if you need to use them on one specific module, you can import the components using ES6 modules:
+
+```javascript
+import "https://resources.developer.clockify.me/validation-widget/latest/style.css";
+import "https://resources.developer.clockify.me/validation-widget/latest/clockify-project-picker.js";
+```
+
+### Using npm
+
+You can also install the components using npm, which pulls the package from the Gitlab registry. Since this package is private, you need to authenticate with the Gitlab registry before installing it. You can do so by creating a `.npmrc` file in the root of your project with the following content:
+
+```bash
+@marketplace:registry=https://git.coingdevelopment.com/api/v4/packages/npm/
+//git.coingdevelopment.com/api/v4/packages/npm/:_authToken=${AUTH_TOKEN}
+```
+
+To get an ```AUTH_TOKEN``` you should have a Developer/Maintainer/Owner role on the ```@marketplace/clockify-web-components``` repository, then you can create a personal Access Token (Preferences > Access Token) with ```api``` or ```read_registry``` scope in your Gitlab account.
+If you have Maintainer/Owner role on the ```@marketplace/clockify-web-components``` repository, you can also use a project Access Token (Settings > Access Tokens), again with ```api``` or ```read_registry``` scope.
+
+Then you can install the package like this:
+
+```bash
+npm install @marketplace/clockify-web-components
+```
+
+and import the components like this:
+
+```javascript
+import "@marketplace/clockify-web-components/dist/style.css";
+import "@marketplace/clockify-web-components/dist/components/clockify-project-picker.js";
+```
+
+or import *all* the components like this:
+
+```javascript
+import "@marketplace/clockify-web-components/dist/style.css";
+import "@marketplace/clockify-web-components/dist/web-components.js";
+```
+
+## Initialization
+
+Before using any components, you must initialize the library with your configuration. This sets up the authentication token, workspace context, and API endpoints.
+
+```javascript
+import { ClockifyWebComponentsApp } from "@marketplace/clockify-web-components";
+
+await ClockifyWebComponentsApp.init({
+  token: "YOUR_TOKEN",
+  workspaceId: "YOUR_WORKSPACE_ID", // optional
+  endpoint: "https://api.clockify.me", // optional
+  homeUrl: "https://clockify.me", // optional
+  addon: false // optional
+});
+```
+
+Once initialized, all components on the page will automatically use this configuration. You don't need to pass `token` or `workspaceId` to individual components unless you want to override them.
+
+This includes components that are dynamically added to the page after the initialization call has completed.
+
+## Themes
+
+The components can render in two different themes: `light` and `dark`. The default theme is `light`, but it gets overridden in two ways:
+
+## The preferred system theme
+When ```prefers-color-scheme``` is set to ```dark```, the components will render in the dark theme and when it is set to ```light```, the components will render in the light theme.
+
+## The ```data-theme``` attribute or class in a parent element
+If a parent element anywhere up the DOM tree has the ```data-theme``` attribute set to ```dark``` or ```class="dark"```, it will make the components render in the dark theme. If the ```data-theme``` attribute is set to ```light``` or ```class="light"```, the components will render in the light theme.
+These attributes take precedence and override the preferred system theme behaviour.
+
+## Localization
+
+Components render in the user's language by default. You can override the UI language by setting `lang` attribute on the `html` element:
+
+```html
+<html lang="fr">
+<!-- rest of the document --->
+<clockify-project-picker></clockify-project-picker>
+<clockify-tags></clockify-tags>
+<clockify-billable></clockify-billable>
+<clockify-custom-fields></clockify-custom-fields>
+<!-- rest of the document --->
+  ...</html>
+```
+
+Supported language codes: `fr`, `de`, `pt`, `es`. Any other value (including region variants like `pt-BR`) will try to fall back to its base language (e.g. `pt-BR` will fall back to `pt`) then ultimately fall back to `en`.

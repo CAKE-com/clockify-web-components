@@ -1,0 +1,184 @@
+.clockify-tags {
+  width: 100%;
+  position: relative;
+  font-family: var(--clockify-font-family-base), sans-serif;
+    &:hover{
+        cursor: pointer;
+    }
+  .tags-header {
+    width: fit-content;
+    max-width: 100%;
+    .svg-wrapper {
+      position: relative;
+      width: fit-content;
+      height: fit-content;
+      &:hover {
+        cursor: pointer;
+      }
+      &.required::after {
+        content: "*";
+        display: inline-block;
+        color: var(--clockify-error);
+        position: absolute;
+        top: -5px;
+        right: 9px;
+      }
+    }
+    clockify-tag {
+      width: 100%;
+    }
+    ::part(base) {
+      box-sizing: border-box;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    ::part(content) {
+      display: inline-block;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  .tags-overlay {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    right: 0;
+    z-index: var(--clockify-z-index-dropdown);
+    width: 360px;
+    max-width: 360px;
+    min-height: 58px;
+    background-color: var(--clockify-white);
+    display: grid;
+    grid-template-rows: 56px 1fr;
+    resize: horizontal;
+    box-shadow: var(--clockify-shadow-dropdown);
+    &.alignment-left {
+      left: 0;
+      right: unset;
+    }
+    &.alignment-right {
+      right: 0;
+      left: unset;
+    }
+    .search-box {
+      position: relative;
+      padding: var(--clockify-spacing-2);
+      max-width: calc(100% - 20px) !important;
+      clockify-input {
+        width: 100%;
+        &::part(form-control) {
+          width: 100%;
+        }
+        &::part(base) {
+          background-color: var(--clockify-dark-400);
+          border-color: var(--clockify-dark-200);
+        }
+      }
+    }
+    ul.tags-list {
+      position: relative;
+      padding: 0 0 var(--clockify-spacing-2) 0;
+      margin: 0;
+      list-style: none;
+      overflow-y: auto;
+      &::-webkit-scrollbar {
+        width: 3px;
+        background-color: transparent;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: var(--clockify-primary);
+        border-radius: var(--clockify-border-radius-md);
+      }
+      li.tag {
+        display: flex;
+        align-items: center;
+        padding: var(--clockify-spacing-2) var(--clockify-spacing-4);
+        gap: var(--clockify-spacing-2);
+        transition: background-color 0.2s ease;
+        &:hover {
+          background-color: var(--clockify-gray-100);
+          cursor: pointer;
+        }
+      }
+    }
+    .no-tags {
+      box-sizing: border-box;
+      height: 58px;
+      padding: var(--clockify-spacing-2) var(--clockify-spacing-4);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 3px;
+      span:first-child{
+        font-size: var(--clockify-font-size-md);
+      }
+      span:last-child{
+        font-size: var(--clockify-font-size-xs);
+      }
+    }
+    .quick-create-tag {
+      box-sizing: border-box;
+      min-height: 58px;
+      padding: var(--clockify-spacing-2) var(--clockify-spacing-4);
+      span.no-tag {
+        font-size: var(--clockify-font-size-md);
+      }
+      span.quickly {
+        margin-top: 3px;
+        font-size: var(--clockify-font-size-xs);
+        display: block;
+      }
+      a {
+        color: var(--clockify-primary);
+        display: inline;
+        padding: 0;
+        margin: 0;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        white-space: wrap;
+        text-align: left;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+:host(clockify-tags.sl-theme-dark) {
+  .tags-overlay {
+    background-color: var(--clockify-dark-200);
+    border: none;
+    .search-box {
+      border-bottom: none;
+      clockify-input {
+        color: var(--clockify-gray-700);
+      }
+      svg.search {
+        fill: var(--clockify-gray-700);
+      }
+      svg.close {
+        fill: var(--clockify-gray-700);
+      }
+    }
+    ul.tags-list {
+      li.tag {
+        color: var(--clockify-gray-700);
+        .tag-name {
+          color: var(--clockify-gray-700);
+        }
+        &:hover {
+          background-color: var(--clockify-dark-400);
+        }
+      }
+    }
+    .quick-create-tag {
+      color: var(--clockify-gray-700);
+    }
+  }
+}

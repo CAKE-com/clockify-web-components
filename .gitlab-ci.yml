@@ -1,0 +1,57 @@
+image: node:25
+
+stages:
+  - build
+  - publish
+  - publish-npm
+
+.build: &build
+  script:
+    - npm i -f
+    - npm run test:consumer
+  artifacts:
+    paths:
+      - dist
+    untracked: true
+    expire_in: 1 week
+
+.publish: &publish
+  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+  script:
+    - aws s3 sync dist/ s3://clockify-developer-resources/$DIRECTORY/latest/
+    - aws cloudfront create-invalidation  --distribution-id EP65F1PFNYZ06 --paths '/*'
+
+build-web-components:
+  only:
+    refs:
+      - prod
+  stage: build
+  <<: *build
+  artifacts:
+    paths:
+      - dist
+    expire_in: 1 week
+
+publish-cdn:
+  only:
+    refs:
+      - prod
+  variables:
+    DIRECTORY: "validation-widget"
+  stage: publish
+  dependencies:
+    - build-web-components
+  <<: *publish
+  needs: ["build-web-components"]
+
+publish-gitlab-registry:
+  only:
+    refs:
+      - prod
+  stage: publish-npm
+  <<: *build
+  script:
+    - npm publish --registry=https://git.coingdevelopment.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/
+  needs: ["build-web-components"]
+  artifacts:
+    when: always

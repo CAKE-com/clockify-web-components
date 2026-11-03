@@ -1,0 +1,146 @@
+---
+title: clockify-custom-fields
+description: The `<clockify-custom-fields>` component is a LitElement-based web component designed to manage custom fields in Clockify. It allows users to view and edit custom fields associated with time entries.
+---
+import { Tabs, TabItem, Code, Aside } from '@astrojs/starlight/components';
+
+## Table of Contents
+
+1. [Features](#features)
+2. [Installation](#installation)
+3. [Usage](#usage)
+4. [Properties](#properties)
+5. [Events](#events)
+6. [Styling](#styling)
+---
+
+## Features
+
+The `<clockify-custom-fields>` component allows you to:
+
+- Display custom fields associated with time entries.
+- Edit custom field values depending on the user's permissions.
+- Support various field types such as text, number, link, dropdown (single and multiple), and checkbox.
+- Automatically synchronize changes with Clockify backend or emit events for custom handling.
+
+## Installation
+
+To use the `clockify-custom-fields` component, you need to first make sure you import the base styles, as described in the [Getting started](../..#installation) section.
+
+Then, if you need to import only this component, you can add this to any HTML document:
+
+```html
+<script type="module" src="https://resources.developer.clockify.me/validation-widget/latest/clockify-custom-fields.js"></script>
+```
+
+or import it directly into your module:
+
+```javascript
+import "https://resources.developer.clockify.me/validation-widget/latest/clockify-custom-fields.js";
+```
+
+## Usage
+
+<Aside>This component needs an authentication token to work. Make sure to follow the instructions on the [Authentication](../..#authentication) section of the Getting started page. If you provide a token named `token` via `localStorage` or a parameter named `auth_token` in the query parameters, you can view it below. This is true for all examples on this page.</Aside>
+
+### Basic
+
+Add the `clockify-custom-fields` component to your HTML:
+
+<Tabs>
+    <TabItem label="Code" active>
+        <Code code={`<clockify-custom-fields></clockify-custom-fields>`} lang="html" />
+    </TabItem>
+    <TabItem label="Rendered">
+        <div style="width: 300px;">
+            <clockify-custom-fields></clockify-custom-fields>
+        </div>
+    </TabItem>
+</Tabs>
+
+### In an add-on
+
+Add the `clockify-custom-fields` component to your HTML:
+
+<Tabs>
+    <TabItem label="Code" active>
+        <Code code={`<clockify-custom-fields addon></clockify-custom-fields>`} lang="html" />
+    </TabItem>
+    <TabItem label="Rendered">
+        <clockify-custom-fields addon={true}></clockify-custom-fields>
+    </TabItem>
+</Tabs>
+
+## Properties
+
+| Property          | Type                                        | Description                                                                                                                                      | Default           |
+|-------------------|---------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|-------------------|
+| `disabled`        | `Boolean`                                   | Disables component interactions.                                                                                                                 | `false`           |
+| `open`            | `Boolean`                                   | Toggles the visibility of the custom fields panel.                                                                                               | `false`           |
+| `addon`           | `Boolean`                                   | Enables add-on features.                                                                                                                         | `false`           |
+| `readonly`        | `Boolean`                                   | Makes component read-only.                                                                                                                       | `false`           |
+| `timeentryid`     | `String`                                    | ID of the Clockify time entry.                                                                                                                   | `""`              |
+| `token`           | `String`                                    | Authentication token.                                                                                                                            | `""`              |
+| `tokenkey`        | `String`                                    | The localStorage key in which the authentication token is stored                                                                                 | `""`              |
+| `tokensearchparam`| `String`                                    | The URL search parameter key on which the authentication token is passed                                                                         | `""`              |
+| `homeurl`         | `String`                                    | Base URL for Clockify API calls.                                                                                                                 | `""`              |
+| `homeurlkey`      | `String`                                    | Key for retrieving the base URL from storage.                                                                                                    | `""`              |
+| `endpoint`        | `String`                                    | Custom API endpoint.                                                                                                                             | `""`              |
+| `syncPickedData`  | `'EMIT_EVENT_ONLY'` \| `'SYNC_ON_CHANGE'`   | Specifies sync behavior (`'EMIT_EVENT_ONLY'` or `'SYNC_ON_CHANGE'`). If you choose `'SYNC_ON_CHANGE'`, you need to provide the `timeentryid` property. | `'EMIT_EVENT_ONLY'` | | `'DEFAULT'`       |
+| `alignment`       | `String`                                    | Alignment of dropdowns (`'left'` or `'right'`).                                                                                                  | `'left'`          |
+| `columns`         | `Number`                                    | Controls the number of columns of the grid display.                                                                                              | `5`               |
+| `workspaceId`     | `String`                                    | Workspace ID for API calls.                                                                                                                      | `""`              |
+| `projectId`       | `String`                                    | Selected project ID to determine if custom field with `projectDefaultValues` should be rendered or not.                                          | `""`              |
+| `customFieldValues` | `Array<CustomFieldValue>`                 | Array of custom field values to pre-populate the fields.                                                                                         | `[]`              |
+| `borderlessSelect`| `Boolean`                                   | Controls whether the select inputs (dropdowns) have borders.                                                                                     | `false`            |
+
+## Events
+
+| Event    | Description                                                                                     |
+|----------|-------------------------------------------------------------------------------------------------|
+| `change` | Emitted when a custom field value is changed. The `detail` property yields two values: `changed`, which contains an object with the changed custom field id and its value, and `all`, which is an array of all custom fields in view. |
+| `error`   | Emitted on global error, with `error` in the `detail` property.                                       |
+| `success` | Emitted on global create/update/delete actions, with `message` and `data` in the `detail` property.                                       |
+
+## Styling
+
+This component uses `@shoelace-style/shoelace` for UI elements and can be styled using CSS custom properties and parts.
+
+You can change properties of the topmost container `<clockify-custom-fields>`, like you would do for any HTML element, like so:
+
+```css
+clockify-custom-fields {
+  width: 100%;
+}
+```
+
+For styling elements inside the Shadow DOM, you can use the `part` attribute:
+
+```css
+clockify-custom-fields::part(input) {
+  color: #333;
+}
+```
+
+### Notes on the layout
+
+On large screens (`min-width: 769px`), the component is displayed by default in 5 columns, following the Clockify web application layout. You can control teh number of columns by the `column` property. Below 769px, it switches to a vertical layout (one column).
+The component also supports [container queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_queries), and if you choose to make use of them, it will adapt the layout based on the container width, not the window one. You can make use of container queries by applying these styles to the parent:
+
+```css
+.parent {
+  container-type: inline-size;
+  container-name: your-container-cname;
+}
+```
+
+where `your-container-name` can be any string.
+
+## Notes
+
+- **Data Synchronization**: The component allows sync behaviors like `'EMIT_EVENT_ONLY'` for minimal data emission.
+- **Accessibility**: The component uses accessible HTML elements and can be navigated using keyboard controls.
+
+---
+
+This documentation provides an overview of the `clockify-custom-fields` component’s functionality and usage. For further customization, refer to the component’s source code.

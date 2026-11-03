@@ -1,0 +1,94 @@
+clockify-input {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 0;
+}
+
+:host(clockify-input){
+  z-index: 0;
+}
+
+:host(clockify-input[size="medium"]){
+  &::part(form-control){
+    height: 40px;
+  }
+  &::part(form-control-input){
+    height: 40px;
+  }
+  &::part(base){
+    height: 40px;
+  }
+  &::part(input){
+    height: 40px;
+  }
+}
+
+:host(clockify-input[size="large"]){
+    &::part(input){
+        font-size: 1rem;
+    }
+}
+
+:host(clockify-input[required]){
+  &::part(form-control){
+    position: relative;
+  }
+}
+
+:host(clockify-input[required]){
+  &::part(form-control){
+    position: relative;
+  }
+  &::part(form-control-label){
+    position: absolute;
+    color: transparent;
+    z-index: var(--clockify-z-index-default);
+    font-family: var(--clockify-font-family-base), sans-serif;
+    top: 4px;
+    left: 11px;
+  }
+}
+
+:host(clockify-input[required]::part(form-control-label)::after){
+  color: var(--clockify-error) !important;
+}
+
+:host(clockify-input.sl-theme-light) {
+  &::part(base) {
+    background-color: var(--clockify-white) !important;
+    border-color: var(--clockify-gray-300) !important;
+  }
+}
+
+
+:host(clockify-input.sl-theme-dark) {
+  --sl-input-color-hover: var(--clockify-dark-text);
+  --sl-input-color-focus: var(--clockify-dark-text);
+  &::part(base) {
+    background-color: var(--clockify-dark-400);
+    border-color: var(--clockify-dark-700);
+    transition: border-color 0.2s ease;
+    &:hover {
+      color: var(--clockify-dark-text);
+    }
+    &:has(:focus) {
+      border-color: var(--clockify-dark-border-focus);
+    }
+    &.input--focused:not(.input--disabled) ::part(input) {
+      background-color: var(--clockify-dark-400);
+      border-color: var(--clockify-dark-700);
+    }
+    &::part(input) {
+      color: var(--clockify-dark-text);
+      &::placeholder {
+        font-family: var(--clockify-font-family-base), sans-serif;
+        color: var(--clockify-dark-placeholder);
+      }
+    }
+    &:not(.input--disabled):hover{
+      border-color: var(--clockify-gray-1000);
+    }
+  }
+}

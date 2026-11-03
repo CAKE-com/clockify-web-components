@@ -1,0 +1,193 @@
+---
+title: Custom styles
+description: Learn how to customize the appearance of Clockify Web Components using CSS Design Tokens.
+---
+## Overview
+
+Clockify Web Components use a system of CSS Design Tokens (also known as [CSS Custom Properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascading_variables/Using_CSS_custom_properties)) to allow for easy customization of their visual appearance. These tokens control various aspects like colors, spacing, and typography. By overriding these tokens in your own CSS, you can tailor the components to match your application's theme without needing to modify the component internals.
+
+## How to Use Design Tokens
+
+Design tokens are essentially CSS variables that you can redefine. Our components will then pick up your custom values.
+
+### Identifying Tokens
+
+Each component exposes a set of tokens relevant to its styling. Use your browser's developer tools to inspect components and see which tokens are available. Look for CSS custom properties (e.g., `--clockify-primary`).
+
+### Overriding Tokens
+
+To customize a component, you can override its design tokens in your own stylesheet. Make sure your stylesheet is loaded *after* the component's styles.
+
+**Examples**
+
+  ```css
+  /* Your custom-styles.css */
+  :root { /* Or a more specific selector if needed */
+    --clockify-primary: #4A90E2; /* Your desired blue */
+    --clockify-text: #FFFFFF; /* White text */
+    --clockify-primary-600: #357ABD; /* Darker blue on hover */
+  }
+
+  /* If you only want to target a specific instance of a button */
+  .my-custom-themed-button {
+    --clockify-primary: #50C878; /* Emerald green */
+    --clockify-text: #FFFFFF;
+    --clockify-primary-600: #3AA05A;
+  }
+  ```
+
+Then, apply this class to your component:
+```html
+  <clockify-button class="my-custom-themed-button">Custom Button</clockify-button>
+```
+
+### Available Tokens
+
+Here's a comprehensive list of available tokens:
+
+```css
+:root{
+  --clockify-primary: #03a9f4;
+  --clockify-primary-500: #0288d1;
+  --clockify-primary-600: #02587f;
+  --clockify-primary-disabled: #81d4fa;
+  --clockify-primary-bg: #e1f5fe;
+  --clockify-primary-bg-hover: #b3e5fc;
+  --clockify-success: #8bc34a;
+  --clockify-success-500: #285b2a;
+  --clockify-warning: #ff9800;
+  --clockify-warning-500: #854f00;
+  --clockify-error: #f44336;
+  --clockify-error-500: #d32f2f;
+  --clockify-white: #ffffff;
+  --clockify-gray-50: #f2f6f8;
+  --clockify-gray-100: #f5f7fa;
+  --clockify-gray-200: #e4eaee;
+  --clockify-gray-300: #c6d2d9;
+  --clockify-gray-400: #90a4ae;
+  --clockify-gray-500: #607d8b;
+  --clockify-gray-600: #37474f;
+  --clockify-gray-700: #9ba8b0;
+  --clockify-gray-800: #c8d2d9;
+  --clockify-gray-900: #586e6b;
+  --clockify-gray-1000: #90A4AE;
+  --clockify-gray-1100: #e1e9ef;
+  --clockify-gray-blue-100: #e2e8f0;
+  --clockify-text: #0000008a;
+  --clockify-text-darker: #000000cc;
+  --clockify-text-muted: #00000052;
+  --clockify-text-lighter: #666666;
+  --clockify-text-lightest: #999999;
+  --clockify-box-shadow-color: #0000001a; // Renamed from --box-shadow to be more descriptive
+  --clockify-dark-100: #000000;
+  --clockify-dark-200: #12191d;
+  --clockify-dark-300: #333333;
+  --clockify-dark-400: #263238;
+  --clockify-dark-500: #13191d;
+  --clockify-dark-600: #1f272b;
+  --clockify-dark-700: #17181c;
+  --clockify-dark-800: #1d272c;
+  --clockify-dark-text: #c6d2d9;
+  --clockify-dark-text-lighter: #e1f5fe;
+  --clockify-dark-border: #13191d;
+
+  --clockify-font-family-base: "Roboto", sans-serif;
+
+  --clockify-font-size-xs: 0.8rem;    /* 11.2px */
+  --clockify-font-size-sm: 0.857rem;  /* 12px */
+  --clockify-font-size-md: 1rem;      /* 14px */
+  --clockify-font-size-lg: 1.5rem;    /* 21px */
+  --clockify-font-size-xl: 1.714rem;  /* 24px */
+
+  --clockify-font-weight-light: 100;
+  --clockify-font-weight-normal: 400;
+  --clockify-font-weight-medium: 500;
+
+  --clockify-line-height-tight: 1;
+  --clockify-line-height-normal: 1.5;
+  --clockify-line-height-base: 16px;
+
+  --clockify-spacing-1: 5px;
+  --clockify-spacing-2: 10px;
+  --clockify-spacing-3: 15px;
+  --clockify-spacing-4: 20px;
+  --clockify-spacing-8: 40px;
+
+  --clockify-border-radius-sm: 2px;
+  --clockify-border-radius-md: 10px;
+
+  --clockify-border-width-default: 1px;
+
+  --clockify-shadow-dropdown: 0 5px 10px var(--clockify-box-shadow-color);
+  --clockify-shadow-overlay: 0 0 8px var(--clockify-box-shadow-color);
+
+  --clockify-z-index-default: 1;
+  --clockify-z-index-dropdown: 2;
+  --clockify-z-index-overlay: 3;
+  --clockify-z-index-dialog: 40;
+}
+```
+
+Also, because this library uses various elements from the [Shoelace](https://shoelace.style/) library, some of Shoelace's own design tokens have been overridden. So, if you find one of these tokens instead of the above mentioned ones, you know which token to change. Here's the complete list of overridden variables:
+
+```css
+:root,
+:root:has(.sl-theme-light),
+:root .sl-theme-light {
+  --sl-button-font-size-small: var(--clockify-font-size-sm) !important;
+  --sl-color-primary-50: var(--clockify-primary-bg) !important;
+  --sl-color-primary-500: var(--clockify-primary-500);
+  --sl-color-primary-600: var(--clockify-primary);
+  --sl-color-primary-800: var(--clockify-primary-600);
+  --sl-color-danger-500: var(--clockify-error-500);
+  --sl-color-danger-600: var(--clockify-error);
+  --sl-font-sans: var(--clockify-font-family-base), sans-serif;
+  --sl-font-serif: var(--clockify-font-family-base), sans-serif;
+  --sl-input-font-size-medium: var(--clockify-font-size-md);
+  --sl-button-font-size-medium: var(--clockify-font-size-md);
+  --sl-border-radius-medium: var(--clockify-border-radius-sm);
+  --sl-focus-ring-color: transparent;
+  --sl-focus-ring-width: 0;
+  --sl-input-border-color-focus: rgba(0, 0, 0, 0.32);
+  --sl-spacing-medium: var(--clockify-spacing-2);
+  --sl-tooltip-arrow-size: 0;
+  --sl-tooltip-background-color: var(--clockify-dark-300);
+  --sl-input-required-content-color: var(--clockify-error);
+  font-size: 14px;
+}
+
+:root:has(.sl-theme-dark),
+:root .sl-theme-dark {
+  --sl-button-font-size-small: var(--clockify-font-size-sm) !important;
+  --sl-color-neutral-0: var(--clockify-dark-400);
+  --sl-color-primary-50: var(--clockify-dark-400) !important;
+  --sl-color-primary-100: var(--clockify-dark-400);
+  --sl-color-primary-500: var(--clockify-primary-500);
+  --sl-color-primary-600: var(--clockify-primary);
+  --sl-color-primary-800: var(--clockify-primary-600);
+  --sl-color-danger-500: var(--clockify-error-500);
+  --sl-color-danger-600: var(--clockify-error);
+  --sl-color-primary-700: var(--clockify-dark-text);
+  --sl-color-neutral-100: var(--clockify-dark-400);
+  --sl-color-neutral-700: var(--clockify-dark-text);
+  --sl-color-neutral-1000: var(--clockify-dark-text-lighter);
+  --sl-font-sans: var(--clockify-font-family-base), sans-serif;
+  --sl-font-serif: var(--clockify-font-family-base), sans-serif;
+  --sl-input-font-size-medium: var(--clockify-font-size-md);
+  --sl-button-font-size-medium: var(--clockify-font-size-md);
+  --sl-border-radius-medium: var(--clockify-border-radius-sm);
+  --sl-focus-ring-color: transparent;
+  --sl-focus-ring-width: 0;
+  --sl-input-border-color-focus: rgba(0, 0, 0, 0.32);
+  --sl-spacing-medium: var(--clockify-spacing-2);
+  --sl-input-background-color: var(--clockify-dark-400) !important;
+  --sl-input-background-color-hover: var(--clockify-dark-400);
+  --sl-input-background-color-focus: var(--clockify-dark-400);
+  --sl-panel-background-color: var(--clockify-dark-600);
+  --sl-input-color: var(--clockify-dark-text) !important;
+  --sl-tooltip-arrow-size: 0;
+  --sl-tooltip-background-color: var(--clockify-gray-800);
+  --sl-input-required-content-color: var(--clockify-error);
+  font-size: 14px;
+}
+```

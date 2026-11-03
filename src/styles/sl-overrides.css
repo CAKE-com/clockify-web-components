@@ -1,0 +1,67 @@
+@import "vars.css";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap");
+
+:root,
+:root:has(.sl-theme-light),
+:root .sl-theme-light {
+  --sl-button-font-size-small: var(--clockify-font-size-sm) !important;
+  --sl-color-primary-50: var(--clockify-primary-bg) !important;
+  --sl-color-primary-500: var(--clockify-primary-500);
+  --sl-color-primary-600: var(--clockify-primary);
+  --sl-color-primary-800: var(--clockify-primary-600);
+  --sl-color-danger-500: var(--clockify-error-500);
+  --sl-color-danger-600: var(--clockify-error);
+  --sl-color-neutral-0: var(--clockify-white);
+  --sl-font-sans: var(--clockify-font-family-base), sans-serif;
+  --sl-font-serif: var(--clockify-font-family-base), sans-serif;
+  --sl-input-font-size-medium: var(--clockify-font-size-md);
+  --sl-button-font-size-medium: var(--clockify-font-size-md);
+  --sl-border-radius-medium: var(--clockify-border-radius-sm);
+  --sl-focus-ring-color: transparent;
+  --sl-focus-ring-width: 0 !important;
+  --sl-input-border-color-focus: rgba(0, 0, 0, 0.32);
+  --sl-spacing-medium: var(--clockify-spacing-2);
+  --sl-tooltip-arrow-size: 0;
+  --sl-tooltip-background-color: var(--clockify-dark-300);
+  --sl-z-index-tooltip: 2000;
+  --sl-input-required-content-color: var(--clockify-error);
+  font-size: 14px;
+}
+
+:root:has(.sl-theme-dark),
+:root .sl-theme-dark {
+  --sl-button-font-size-small: var(--clockify-font-size-sm) !important;
+  --sl-color-neutral-0: var(--clockify-dark-400);
+  --sl-color-primary-50: var(--clockify-dark-400) !important;
+  --sl-color-primary-100: var(--clockify-dark-400);
+  --sl-color-primary-500: var(--clockify-primary-500);
+  --sl-color-primary-600: var(--clockify-primary);
+  --sl-color-primary-800: var(--clockify-primary-600);
+  --sl-color-danger-500: var(--clockify-error-500);
+  --sl-color-danger-600: var(--clockify-error);
+  --sl-color-primary-700: var(--clockify-dark-text);
+  --sl-color-neutral-100: var(--clockify-dark-400);
+  --sl-color-neutral-700: var(--clockify-dark-text);
+  --sl-color-neutral-1000: var(--clockify-dark-text-lighter);
+  --sl-font-sans: var(--clockify-font-family-base), sans-serif;
+  --sl-font-serif: var(--clockify-font-family-base), sans-serif;
+  --sl-input-font-size-medium: var(--clockify-font-size-md);
+  --sl-button-font-size-medium: var(--clockify-font-size-md);
+  --sl-border-radius-medium: var(--clockify-border-radius-sm);
+  --sl-focus-ring-color: transparent;
+  --sl-focus-ring-width: 0 !important;
+  --sl-input-border-color-focus: rgba(0, 0, 0, 0.32);
+  --sl-spacing-medium: var(--clockify-spacing-2);
+  --sl-input-background-color: var(--clockify-dark-400) !important;
+  --sl-input-background-color-hover: var(--clockify-dark-400);
+  --sl-input-background-color-focus: var(--clockify-dark-400);
+  --sl-panel-background-color: var(--clockify-dark-600);
+  --sl-input-color: var(--clockify-dark-text) !important;
+  --sl-input-color-hover: var(--clockify-dark-text) !important;
+  --sl-input-color-focus: var(--clockify-dark-text) !important;
+  --sl-tooltip-arrow-size: 0;
+  --sl-tooltip-background-color: var(--clockify-gray-800);
+  --sl-z-index-tooltip: 2000;
+  --sl-input-required-content-color: var(--clockify-error);
+  font-size: 14px;
+}

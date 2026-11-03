@@ -1,0 +1,293 @@
+---
+title: clockify-select
+description: The `<clockify-select>` component is a LitElement-based web component designed to provide a customizable select dropdown with multiple features such as filtering, multiple selection, and custom rendering.
+---
+import {Tabs, TabItem, Aside, Code} from '@astrojs/starlight/components';
+
+## Table of Contents
+
+1. [Features](#features)
+2. [Installation](#installation)
+3. [Usage](#usage)
+   - [Basic usage](#basic-usage)
+   - [Multiple selection](#multiple-selection)
+   - [Radio buttons](#radio-buttons)
+   - [Option grouping](#option-grouping)
+   - [Custom option content](#custom-option-content)
+4. [Properties](#properties)
+5. [Events](#events)
+6. [Styling](#styling)
+
+---
+
+## Features
+
+The `<clockify-select>` component allows you to:
+
+- Create a customizable select dropdown.
+- Support single and multiple selection.
+- Enable or disable internal filtering.
+- Customize the appearance with themes and sizes.
+- Use checkboxes or radio buttons for selection.
+- Handle custom filtering logic.
+- Display headings and group options.
+- Include custom content within options.
+
+## Installation
+
+To use the `clockify-select` component, you need to first make sure you import the base styles, as described in the [Getting started](../..#installation) section.
+
+Then, if you need to import only this component, you can add this to any HTML document:
+
+```html
+<script type="module" src="https://resources.developer.clockify.me/validation-widget/latest/clockify-select.js"></script>
+```
+
+or import it directly into your module:
+
+```javascript
+import "https://resources.developer.clockify.me/validation-widget/latest/clockify-select.js";
+```
+
+## Usage
+
+<Aside>This component is designed to be used within the Clockify environment and may require authentication tokens or additional setup. Please refer to the [Authentication](/index#authentication) section for more details.</Aside>
+
+### Basic usage
+
+Add the `clockify-select` component to your HTML:
+
+<Tabs>
+    <TabItem label="Rendered" active>
+        <div style="width: 300px;">
+            <clockify-select placeholder="Choose an option">
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+                <option value="option3">Option 3</option>
+            </clockify-select>
+        </div>
+    </TabItem>
+    <TabItem label="Code">
+
+        ```html
+        <clockify-select placeholder="Choose an option">
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+        </clockify-select>
+        ```
+
+    </TabItem>
+</Tabs>
+
+### Multiple selection
+
+Enable multiple selection by setting the `multiple` property:
+
+<Tabs>
+    <TabItem label="Rendered">
+        <div style="width: 300px;">
+            <clockify-select multiple placeholder="Select options">
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+                <option value="option3">Option 3</option>
+                <option value="option4">Option 4</option>
+            </clockify-select>
+        </div>
+    </TabItem>
+    <TabItem label="Code">
+        <Code code={`<clockify-select multiple placeholder="Select options">
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+            <option value="option4">Option 4</option>
+        </clockify-select>`} lang="html" />
+    </TabItem>
+</Tabs>
+
+```javascript
+const selectElement = document.querySelector('clockify-select');
+selectElement.addEventListener('filter-change', (event) => {
+  const filterValue = event.detail.filter;
+  // Implement custom filtering logic here and update options
+});
+```
+
+### Radio buttons
+
+Use radio buttons instead of checkboxes for selection by setting the `radio` property to `true`:
+
+<Tabs>
+    <TabItem label="Rendered">
+        <div style="width: 300px;">
+            <clockify-select radio placeholder="Select one option">
+                <option value="option1">Option A</option>
+                <option value="option2">Option B</option>
+                <option value="option3">Option C</option>
+            </clockify-select>
+        </div>
+    </TabItem>
+    <TabItem label="Code">
+        <Code code={`<clockify-select radio placeholder="Select one option">
+            <option value="option1">Option A</option>
+            <option value="option2">Option B</option>
+            <option value="option3">Option C</option>
+        </clockify-select>`} lang="html" />
+    </TabItem>
+</Tabs>
+
+### Option grouping
+
+Group options under headings by using `data-heading="true"`:
+
+<Tabs>
+    <TabItem label="Rendered">
+        <div style="width: 300px;">
+            <clockify-select multiple placeholder="Select options">
+                <option data-heading="true">Group 1</option>
+                <option value="option1">Option 1</option>
+                <option value="option2">Option 2</option>
+                <option data-heading="true">Group 2</option>
+                <option value="option3">Option 3</option>
+                <option value="option4">Option 4</option>
+            </clockify-select>
+        </div>
+    </TabItem>
+    <TabItem label="Code">
+        <Code code={`<clockify-select multiple placeholder="Select options">
+            <option data-heading="true">Group 1</option>
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option data-heading="true">Group 2</option>
+            <option value="option3">Option 3</option>
+            <option value="option4">Option 4</option>
+        </clockify-select>`} lang="html" />
+
+    </TabItem>
+</Tabs>
+
+## Properties
+
+| Property             | Type                                  | Description                                                                                                                                                                                                                  | Default      |
+|----------------------|---------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
+| `placeholder`        | `String`                              | Placeholder text displayed when no option is selected.                                                                                                                                                                        | `""`         |
+| `filterInputPlaceholder` | `String`                          | Placeholder text for the filter input field.                                                                                                                                                                                  | `"Search options"` |
+| `name`               | `String`                              | Name attribute for form submission.                                                                                                                                                                                           | `""`         |
+| `size`               | `'small'` \| `'medium'` \| `'large'`  | Size of the select component.                                                                                                                                                                                                 | `'medium'`   |
+| `multiple`           | `Boolean`                             | Enables multiple selection if `true`.                                                                                                                                                                                         | `false`      |
+| `disabled`           | `Boolean`                             | Disables the select component if `true`.                                                                                                                                                                                      | `false`      |
+| `open`               | `Boolean`                             | Controls the open state of the dropdown.                                                                                                                                                                                      | `false`      |
+| `showSelectAll`      | `Boolean`                             | Shows a "Select all" option when `true`. Only applicable when `multiple` is `true`.                                                                                                                                           | `false`      |
+| `showFilterInput`    | `Boolean` \| `null`                   | Shows the filter input field when `true`. If `null`, it defaults to `true` when `multiple` is `true`.                                                                                                                        | `null`       |
+| `disableInternalFilter` | `Boolean`                          | Disables the internal filtering logic. Useful for implementing custom filtering.                                                                                                                                              | `false`      |
+| `borderless`         | `Boolean`                             | Renders the select component without borders if `true`.                                                                                                                                                                       | `false`      |
+| `stayOpenOnSelect`   | `Boolean`                             | Keeps the dropdown open after selection if `true`.                                                                                                                                                                            | `false`      |
+| `radio`              | `Boolean`                             | Uses radio buttons for selection if `true`. Applicable for single selection.                                                                                                                                                  | `false`      |
+| `required`           | `Boolean`                             | Marks the select component as required.                                                                                                                                                                                       | `false`      |
+| `title`              | `String`                              | Sets the title attribute, useful for tooltips.                                                                                                                                                                                | `""`         |
+| `highlightedOption`  | `String`                              | Controls which option is highlighted.                                                                                                                                                                                         | `""`         |
+| `selectedValues`     | `Array<String>`                       | Array of selected option values.                                                                                                                                                                                              | `[]`         |
+| `options`            | `Array<HTMLOptionElement>`            | Array of option elements.                                                                                                                                                                                                     | `[]`         |
+| `filteredOptions`    | `Array<HTMLOptionElement>`            | Array of filtered option elements based on the filter input.                                                                                                                                                                  | `[]`         |
+| `filterString`       | `String`                              | Current value of the filter input field.                                                                                                                                                                                      | `""`         |
+
+## Events
+
+| Event            | Description                                                                                                              |
+|------------------|--------------------------------------------------------------------------------------------------------------------------|
+| `change`         | Emitted when the selection changes. Contains the selected values in the `detail.selected` property.                       |
+| `open`           | Emitted when the dropdown is opened or closed. Contains the open state in the `detail.open` property.                     |
+| `filter-change`  | Emitted when the filter input value changes. Contains the filter string in the `detail.filter` property.                  |
+
+## Styling
+
+You can style the `<clockify-select>` component using CSS custom properties and parts.
+
+### CSS Custom Properties
+
+| Property                      | Description                                       |
+|-------------------------------|---------------------------------------------------|
+| `--clockify-select-background`| Background color of the select component.         |
+| `--clockify-select-color`     | Text color of the select component.               |
+| `--clockify-select-border`    | Border style of the select component.             |
+
+### CSS Parts
+
+| Part                   | Description                                    |
+|------------------------|------------------------------------------------|
+| `button`               | Styles the trigger button of the select.       |
+| `menu`                 | Styles the dropdown menu.                      |
+| `menu-item`            | Styles each menu item.                         |
+| `checkbox`             | Styles the checkbox elements in multiple select.|
+| `radio`                | Styles the radio elements in single select.    |
+| `filter-input`         | Styles the filter input field.                 |
+
+### Example
+
+```css
+clockify-select::part(button) {
+background-color: #fff;
+color: #333;
+border: 1px solid #ccc;
+}
+
+clockify-select::part(menu-item) {
+padding: 8px 12px;
+}
+
+clockify-select::part(filter-input) {
+margin-bottom: 8px;
+}
+```
+
+## Notes
+
+- **Custom Option Content**: You can use custom content inside option elements. For example, to include icons or images.
+
+```html
+<clockify-select placeholder="Choose an option">
+<option value="option1">
+<span><img src="icon1.png" alt="Icon 1" width="16" height="16"> Option 1</span>
+</option>
+<option value="option2">
+<span><img src="icon2.png" alt="Icon 2" width="16" height="16"> Option 2</span>
+</option>
+</clockify-select>
+```
+
+- **Grouping Options**: Use `data-heading="true"` on an option to display it as a heading or group label.
+
+```html
+<clockify-select multiple placeholder="Select options">
+<option data-heading="true">Group 1</option>
+<option value="option1">Option 1</option>
+<option value="option2">Option 2</option>
+<option data-heading="true">Group 2</option>
+<option value="option3">Option 3</option>
+<option value="option4">Option 4</option>
+</clockify-select>
+```
+
+- **Handling Custom Filtering**: When `disableInternalFilter` is set to `true`, listen to the `filter-change` event to implement custom filtering logic.
+
+```javascript
+const selectElement = document.querySelector('clockify-select');
+selectElement.addEventListener('filter-change', (event) => {
+const filterValue = event.detail.filter;
+// Fetch or filter options based on the filterValue
+});
+```
+
+- **Accessibility**: The component is keyboard navigable and supports standard accessibility features.
+
+- **Themes and Sizes**: Customize the appearance by setting the `theme` and `size` properties.
+
+```html
+<clockify-select theme="DARK" size="large" placeholder="Select an option">
+<!-- options -->
+</clockify-select>
+```
+
+---
+
+This documentation provides an overview of the `clockify-select` component's functionality and usage. For further customization, refer to the component's source code.

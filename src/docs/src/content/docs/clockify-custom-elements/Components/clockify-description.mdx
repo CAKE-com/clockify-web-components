@@ -1,0 +1,119 @@
+---
+title: clockify-description
+description: The `<clockify-description>` component is a LitElement-based web component designed to manage the description field of time entries in Clockify. It allows users to enter the description manually or by filtering older time entries.
+---
+import { Tabs, TabItem, Code, Aside } from '@astrojs/starlight/components';
+
+## Table of Contents
+
+1. [Features](#features)
+2. [Installation](#installation)
+3. [Usage](#usage)
+4. [Properties](#properties)
+5. [Events](#events)
+6. [Styling](#styling)
+---
+
+## Features
+
+The `<clockify-description>` component allows you to:
+
+- Display the description field of a time entry.
+- Get recent time entry suggestions on focus.
+- Get filtered time entry suggestions by typing.
+
+## Installation
+
+To use the `clockify-description` component, you need to first make sure you import the base styles and components, as described in the [Getting started](../..#installation) section.
+
+Then, if you need to import only this component, you can add this to any HTML document:
+
+```html
+<script type="module" src="https://resources.developer.clockify.me/validation-widget/latest/clockify-description.js"></script>
+```
+
+or import it directly into your module:
+
+```javascript
+import "https://resources.developer.clockify.me/validation-widget/latest/clockify-description.js";
+```
+
+## Usage
+
+<Aside>This component needs an authentication token to work. Make sure to follow the instructions on the [Authentication](/index#authentication) section of the Getting started page. If you provide a token named `token` via `localStorage` or a parameter named `auth_token` in the query parameters, you can view it below. This is true for all examples on this page.</Aside>
+
+### Basic usage (Button)
+
+Add the `clockify-description` component to your HTML:
+
+<Tabs>
+    <TabItem label="Rendered" active>
+        <div style="width: 50px;">
+            <clockify-description></clockify-description>
+        </div>
+    </TabItem>
+    <TabItem label="Code">
+        <Code code={`<clockify-description></clockify-description>`} lang="html" />
+    </TabItem>
+</Tabs>
+
+## Properties
+
+| Property         | Type                                        | Description                                                                                                                                      | Default             |
+|------------------|---------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|---------------------|
+| `disabled`       | `Boolean`                                   | Disables component interactions.                                                                                                                 | `false`             |
+| `addon`          | `Boolean`                                   | Enables add-on features.                                                                                                                         | `false`             |
+| `readonly`       | `Boolean`                                   | Makes component read-only.                                                                                                                       | `false`             |
+| `switch`         | `Boolean`                                   | Determines if the component is displayed as a switch. If `false`, displays as a button.                                                          | `false`             |
+| `description`    | `String`                                    | Sets the initial description.                                                                                                                    | ``                  |
+| `placeholder`    | `String`                                    |  Sets the placeholder.                                                                                                                     | `What are you working on?`|
+| `workspaceId`    | `String`                                    | Workspace ID for API calls.                                                                                                                      | `""`                |
+| `timeentryid`    | `String`                                    | ID of the Clockify time entry.                                                                                                                   | `""`                |
+| `token`          | `String`                                    | Authentication token.                                                                                                                            | `""`                |
+| `tokenkey`       | `String`                                    | The localStorage key in which the authentication token is stored                                                                                 | `""`                |
+| `tokensearchparam`| `String`                                   | The URL search parameter key on which the authentication token is passed                                                                         | `""`                |
+| `homeurl`        | `String`                                    | Base URL for Clockify API calls.                                                                                                                 | `""`                |
+| `homeurlkey`     | `String`                                    | Key for retrieving the base URL from storage.                                                                                                    | `""`                |
+| `endpoint`       | `String`                                    | Custom API endpoint.                                                                                                                             | `""`                |
+
+## Events
+
+| Event    | Description                                                                                       |
+|----------|---------------------------------------------------------------------------------------------------|
+| `change` | Emitted when the description status changes. Contains the updated `description` in the `detail` property. |
+| `select` | Emitted when the user selects a suggested time entry. Contains the time entry object in the `timeEntry` property of the `detail` property. |
+| `error`   | Emitted on global error, with `error` in the `detail` property.                                       |
+| `success` | Emitted on global create/update/delete actions, with `message` and `data` in the `detail` property.                                       |
+
+## Styling
+
+This component uses `@shoelace-style/shoelace` components and can be styled using CSS custom properties and parts.
+
+You can change properties of the topmost container `<clockify-description>`, like you would do for any HTML element, like so:
+
+```css
+clockify-description {
+  width: 50px;
+}
+```
+
+## Parts
+For styling elements inside the Shadow DOM, you can use the `part` attribute if exposed.
+
+Parts exposed by the `clockify-description` component:
+
+| Part                  | Description                                                                      |
+|-----------------------|----------------------------------------------------------------------------------|
+| `input`               | Capture the input                                                                |
+| `suggestions`         | Capture the `ul` element where the suggested time entries are appended           |
+| `suggestion`          | Capture each `li` of the list of suggested time entries                          |
+
+You can then style these parts like this:
+
+```css
+clockify-description::part(suggestion) {
+  background-color: #fefefe;
+}
+```
+
+This documentation provides an overview of the `clockify-description` component’s functionality and usage. For further customization, refer to the component’s source code.

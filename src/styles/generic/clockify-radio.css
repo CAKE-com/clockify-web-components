@@ -1,0 +1,5 @@
+:host(clockify-radio) {
+  &::part(checked-icon svg){
+    color: var(--clockify-white) !important;
+  }
+}

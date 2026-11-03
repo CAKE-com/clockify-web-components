@@ -1,0 +1,15 @@
+.clockify-billable {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  height: fit-content;
+  max-width: fit-content;
+  font-family: var(--clockify-font-family-base), sans-serif;
+  font-size: var(--clockify-font-size-xl);
+  font-weight: var(--clockify-font-weight-light);
+  &.active {
+    color: var(--clockify-primary);
+    font-weight: var(--clockify-font-weight-normal);
+  }
+}

@@ -1,0 +1,85 @@
+:root {
+  --clockify-primary: #03a9f4;
+  --clockify-primary-500: #0286c2;
+  --clockify-primary-600: #02587f;
+  --clockify-primary-disabled: #81d4fa;
+  --clockify-primary-bg: #e1f5fe;
+  --clockify-primary-bg-hover: #b3e5fc;
+  --clockify-success: #8bc34a;
+  --clockify-success-500: #285b2a;
+  --clockify-warning: #ff9800;
+  --clockify-warning-500: #854f00;
+  --clockify-error: #f44336;
+  --clockify-error-500: #d32f2f;
+  --clockify-white: #ffffff;
+  --clockify-gray-50: #f2f6f8;
+  --clockify-gray-100: #f5f7fa;
+  --clockify-gray-200: #e4eaee;
+  --clockify-gray-300: #c6d2d9;
+  --clockify-gray-400: #90a4ae;
+  --clockify-gray-500: #607d8b;
+  --clockify-gray-600: #37474f;
+  --clockify-gray-700: #9ba8b0;
+  --clockify-gray-800: #c8d2d9;
+  --clockify-gray-900: #586e6b;
+  --clockify-gray-1000: #90A4AE;
+  --clockify-gray-1100: #e1e9ef;
+  --clockify-gray-1200: #c6d2e2;
+    --clockify-gray-1300: #e4eaee;
+  --clockify-gray-blue-100: #e2e8f0;
+  --clockify-text: #0000008a;
+  --clockify-text-darker: #000000cc;
+  --clockify-text-muted: #00000052;
+  --clockify-text-lighter: #666666;
+  --clockify-text-lightest: #999999;
+  --clockify-box-shadow-color: #0000001a;
+  --clockify-dark-100: #000000;
+  --clockify-dark-200: #12191d;
+  --clockify-dark-300: #333333;
+  --clockify-dark-400: #263238;
+  --clockify-dark-500: #13191d;
+  --clockify-dark-600: #1f272b;
+  --clockify-dark-700: #17181c;
+  --clockify-dark-800: #1d272c;
+  --clockify-dark-text: #c6d2d9;
+  --clockify-dark-text-lighter: #e1f5fe;
+  --clockify-dark-placeholder: #5f7c89;
+  --clockify-dark-border: #17181c;
+  --clockify-dark-border-focus: #546E7A;
+
+  --clockify-font-family-base: "Roboto";
+
+  --clockify-font-size-xxs: 0.714rem;    /* 10px */
+  --clockify-font-size-xs: 0.8rem;    /* 11.2px */
+  --clockify-font-size-sm: 0.857rem;  /* 12px */
+  --clockify-font-size-md: 1rem;      /* 14px */
+  --clockify-font-size-lg: 1.5rem;    /* 21px */
+  --clockify-font-size-xl: 1.714rem;  /* 24px */
+
+  --clockify-font-weight-light: 100;
+  --clockify-font-weight-normal: 400;
+  --clockify-font-weight-medium: 500;
+
+  --clockify-line-height-tight: 1;
+  --clockify-line-height-normal: 1.5;
+  --clockify-line-height-base: 16px;
+
+  --clockify-spacing-1: 5px;
+  --clockify-spacing-2: 10px;
+  --clockify-spacing-3: 15px;
+  --clockify-spacing-4: 20px;
+  --clockify-spacing-8: 40px;
+
+  --clockify-border-radius-sm: 2px;
+  --clockify-border-radius-md: 10px;
+
+  --clockify-border-width-default: 1px;
+
+  --clockify-shadow-dropdown: 0 5px 10px var(--clockify-box-shadow-color);
+  --clockify-shadow-overlay: 0 0 8px var(--clockify-box-shadow-color);
+
+  --clockify-z-index-default: 1;
+  --clockify-z-index-dropdown: 2;
+  --clockify-z-index-overlay: 3;
+  --clockify-z-index-dialog: 40;
+}

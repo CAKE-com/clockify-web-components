@@ -1,0 +1,33 @@
+:host(clockify-tag) {
+  &::part(base) {
+    border: none;
+    outline: none;
+    font-family: var(--clockify-font-family-base), sans-serif;
+    transition: background-color 0.2s ease;
+    &:hover {
+      cursor: pointer;
+      background-color: var(--clockify-primary-bg-hover);
+    }
+  }
+}
+
+:host(clockify-tag[size="small"]) {
+  &::part(base) {
+    padding: var(--clockify-spacing-1) var(--clockify-spacing-2);
+  }
+  &::part(content) {
+    font-size: var(--clockify-font-size-sm);
+    height: 22px;
+  }
+}
+
+:host(clockify-tag.sl-theme-dark) {
+  &::part(base) {
+    background-color: var(--clockify-dark-100);
+    color: var(--clockify-dark-text);
+
+    &:hover {
+      background-color: var(--clockify-dark-200);
+    }
+  }
+}

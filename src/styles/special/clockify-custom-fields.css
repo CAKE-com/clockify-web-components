@@ -1,0 +1,52 @@
+.clockify-custom-fields {
+  width: 100%;
+  display: grid;
+  align-content: center;
+  grid-template-columns: repeat(5, minmax(100px, 1fr));
+  gap: var(--clockify-spacing-4);
+  @media (max-width: 768px) {
+    grid-template-columns: minmax(100px, 1fr);
+  }
+  sl-switch {
+    .form-control {
+      width: 100%;
+    }
+    &::part(label)::after {
+      display: none;
+    }
+  }
+  .link {
+    display: flex;
+    gap: var(--clockify-spacing-2);
+    align-items: center;
+    justify-content: flex-start;
+    a {
+      color: var(--clockify-primary);
+      text-decoration: none;
+      font-family: var(--clockify-font-family-base), sans-serif;
+      font-size: var(--clockify-font-size-sm);
+      width: fit-content;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    &.disabled {
+      pointer-events: none;
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+    clockify-select::part(overlay){
+        width: 360px;
+        max-height: 405px !important;
+    }
+}
+
+@container (width < 768px) {
+  .clockify-custom-fields {
+    grid-template-columns: minmax(100px, 1fr);
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "name": "@marketplace/clockify-web-components",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "dist/web-components.js",
+  "module": "dist/web-components.js",
+  "exports": {
+    ".": "./dist/web-components.js",
+    "./dist/style.css": "./dist/style.css",
+    "./dist/web-components.js": "./dist/web-components.js",
+    "./dist/components/clockify-select.js": "./dist/components/clockify-select.js",
+    "./dist/components/clockify-project-picker.js": "./dist/components/clockify-project-picker.js",
+    "./dist/components/clockify-custom-fields.js": "./dist/components/clockify-custom-fields.js",
+    "./dist/components/clockify-tags.js": "./dist/components/clockify-tags.js",
+    "./dist/components/clockify-billable.js": "./dist/components/clockify-billable.js",
+    "./dist/components/clockify-description.js": "./dist/components/clockify-description.js"
+  },
+  "files": [
+    "dist/*"
+  ],
+  "license": "MIT",
+  "author": "Edlir Velaj",
+  "description": "A collection of web components to be used in Clockify related products",
+  "publishConfig": {
+    "@marketplace/clockify-web-components:registry": "https://git.coingdevelopment.com/api/v4/projects/275/packages/npm/"
+  },
+  "scripts": {
+    "dev": "vite",
+    "dev:docs": "cd src/docs && npm install && npm run dev",
+    "docs:build": "cd src/docs && npm install && npm run build",
+    "prebuild": "npm run docs:build || echo 'Docs build skipped'",
+    "build": "vite build",
+    "build:debug": "vite build --debug",
+    "test:consumer": "npm run build && node scripts/consumer-app-smoke-test.mjs",
+    "serve": "vite preview",
+    "start": "vite build --watch & vite preview"
+  },
+  "build": {
+    "outDir": "dist"
+  },
+  "dependencies": {
+    "@lit-labs/observers": "^2.1.0",
+    "@tanstack/query-core": "^5.90.16",
+    "hotkeys-js": "^4.0.0",
+    "lit": "^3.3.2"
+  },
+  "devDependencies": {
+    "@shoelace-style/shoelace": "^2.20.1",
+    "@types/glob": "^8.1.0",
+    "@types/node": "^25.0.6",
+    "autoprefixer": "^10.4.23",
+    "glob": "^13.0.0",
+    "postcss": "^8.5.6",
+    "postcss-nested": "^7.0.2",
+    "prettier": "^3.7.4",
+    "vite": "^7.3.1"
+  },
+  "overrides": {
+    "vite": {
+      "rollup": "npm:@rollup/wasm-node"
+    }
+  }
+}

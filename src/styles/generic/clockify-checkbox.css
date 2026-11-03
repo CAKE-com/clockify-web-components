@@ -1,0 +1,45 @@
+:host(clockify-checkbox) {
+  height: 20px;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  sl-icon::part(checked-icon svg) {
+    color: white;
+  }
+  &::part(control) {
+    width: 18px;
+    height: 17px;
+    padding: 1px;
+    border-radius: var(--clockify-border-radius-sm);
+  }
+  &::part(control--checked) {
+    background-color: var(--clockify-primary);
+    border-color: var(--clockify-primary);
+    &:hover {
+      background-color: var(--clockify-primary-500) !important;
+      border-color: var(--clockify-primary-500) !important;
+    }
+  }
+  &::part(label) {
+    color: var(--clockify-text-lighter);
+    transform: translateY(1px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+:host(clockify-checkbox.sl-theme-dark) {
+  &::part(control) {
+    border-color: var(--clockify-dark-border) !important;
+  }
+  &::part(label) {
+    color: var(--clockify-gray-300) !important;
+  }
+}
+
+:host(clockify-checkbox:not([checked]).sl-theme-dark) {
+  &::part(control) {
+    background: var(--clockify-dark-400) !important;
+  }
+}

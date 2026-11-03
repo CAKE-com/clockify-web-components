@@ -1,0 +1,157 @@
+:host(clockify-switch) {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  &::part(base) {
+    width: 100%;
+  }
+  &::part(label) {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: var(--clockify-font-size-md);
+    line-height: var(--clockify-line-height-md);
+    color: var(--clockify-dark-100);
+  }
+  &[size="large"] {
+    &::part(control) {
+      height: 24px;
+    }
+  }
+}
+
+:host(clockify-switch[checked]) {
+  &::part(control) {
+    background-color: var(--clockify-primary);
+    border-color: var(--clockify-primary);
+  }
+  &::part(thumb) {
+    background-color: var(--clockify-white);
+    border-color: var(--clockify-white) !important;
+  }
+}
+
+:host(clockify-switch:not([checked])) {
+  &::part(control) {
+    background-color: var(--clockify-white);
+    border-color: var(--clockify-gray-300);
+    &:hover {
+      background-color: var(--clockify-white);
+      border-color: var(--clockify-gray-300);
+    }
+  }
+  &::part(thumb) {
+    background-color: var(--clockify-text-lighter);
+    border-color: var(--clockify-text-lighter);
+    &:hover {
+      background-color: var(--clockify-text-lighter);
+      border-color: var(--clockify-text-lighter);
+    }
+  }
+}
+
+:host(clockify-switch:not([checked])) {
+  &::part(control) {
+    background-color: var(--clockify-white);
+    border-color: var(--clockify-gray-300);
+    &:hover {
+      background-color: var(--clockify-white) !important;
+      border-color: var(--clockify-gray-300) !important;
+    }
+  }
+  &::part(thumb),
+  &:hover ::part(thumb) {
+    background-color: var(--clockify-text-lighter) !important;
+    border-color: var(--clockify-text-lighter) !important;
+  }
+}
+
+:host(clockify-switch[disabled]) {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+:host(clockify-switch[data-required]) {
+  &::part(label)::after {
+    display: none;
+  }
+}
+
+:host(clockify-switch[size="small"]) {
+  &::part(control) {
+    height: 18px;
+    width: 32px;
+  }
+  &::part(thumb) {
+    height: 14px;
+    width: 14px;
+    border-color: var(--clockify-text-lighter);
+  }
+}
+
+:host(clockify-switch[size="large"]) {
+  &::part(control) {
+    height: 24px;
+  }
+}
+
+:host(clockify-switch.sl-theme-dark) {
+  &::part(label) {
+    color: var(--clockify-sl-color-neutral-700);
+  }
+}
+
+:host(clockify-switch[checked].sl-theme-dark) {
+  &::part(control) {
+    background-color: var(--clockify-primary);
+    &:hover {
+      background-color: var(--clockify-primary);
+      ::part(thumb) {
+        background-color: var(--clockify-white) !important;
+        border-color: var(--clockify-white) !important;
+      }
+    }
+  }
+  &::part(thumb) {
+    border-color: var(--clockify-white);
+    background-color: var(--clockify-white);
+    &:hover {
+      background-color: var(--clockify-white) !important;
+      border-color: var(--clockify-white) !important;
+    }
+  }
+}
+
+:host(clockify-switch[checked].sl-theme-dark) {
+  &::part(thumb) {
+    border-color: var(--clockify-dark-400) !important;
+    background-color: var(--clockify-dark-400) !important;
+    &:hover {
+      background-color: var(--clockify-dark-400) !important;
+      border-color: var(--clockify-dark-400) !important;
+    }
+  }
+  &::part(label){
+    color: var(--clockify-text-lightest);
+  }
+}
+
+:host(clockify-switch:not([checked]).sl-theme-dark) {
+  &::part(control) {
+    background-color: var(--clockify-dark-400);
+    border-color: var(--clockify-dark-200);
+    &:hover {
+      background-color: var(--clockify-dark-400) !important;
+      border-color: var(--clockify-dark-200) !important;
+    }
+  }
+  &::part(thumb) {
+    border-color: var(--clockify-dark-200);
+    background-color: var(--clockify-gray-600);
+    &:hover {
+      background-color: var(--clockify-gray-600);
+      border-color: var(--clockify-dark-200);
+    }
+  }
+}
