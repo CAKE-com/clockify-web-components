@@ -79,7 +79,7 @@ async function writeConsumerApp(appDir, tarballPath) {
     private: true,
     type: "module",
     dependencies: {
-      "@marketplace/clockify-web-components": pathToFileURL(tarballPath).href,
+      "clockify-web-components": pathToFileURL(tarballPath).href,
     },
   };
 
@@ -124,9 +124,9 @@ export default {
   );
   await writeFile(
     join(appDir, "src", "full-bundle.js"),
-    `import "@marketplace/clockify-web-components/dist/style.css";
-import { ClockifyWebComponentsApp } from "@marketplace/clockify-web-components";
-import "@marketplace/clockify-web-components/dist/web-components.js";
+    `import "clockify-web-components/dist/style.css";
+import { ClockifyWebComponentsApp } from "clockify-web-components";
+import "clockify-web-components/dist/web-components.js";
 
 window.ClockifyConsumerSmoke = {
   appInitAvailable: typeof ClockifyWebComponentsApp.init === "function",
@@ -135,13 +135,13 @@ window.ClockifyConsumerSmoke = {
   );
   await writeFile(
     join(appDir, "src", "single-components.js"),
-    `import "@marketplace/clockify-web-components/dist/style.css";
-import "@marketplace/clockify-web-components/dist/components/clockify-select.js";
-import "@marketplace/clockify-web-components/dist/components/clockify-project-picker.js";
-import "@marketplace/clockify-web-components/dist/components/clockify-custom-fields.js";
-import "@marketplace/clockify-web-components/dist/components/clockify-tags.js";
-import "@marketplace/clockify-web-components/dist/components/clockify-billable.js";
-import "@marketplace/clockify-web-components/dist/components/clockify-description.js";
+    `import "clockify-web-components/dist/style.css";
+import "clockify-web-components/dist/components/clockify-select.js";
+import "clockify-web-components/dist/components/clockify-project-picker.js";
+import "clockify-web-components/dist/components/clockify-custom-fields.js";
+import "clockify-web-components/dist/components/clockify-tags.js";
+import "clockify-web-components/dist/components/clockify-billable.js";
+import "clockify-web-components/dist/components/clockify-description.js";
 `
   );
 }

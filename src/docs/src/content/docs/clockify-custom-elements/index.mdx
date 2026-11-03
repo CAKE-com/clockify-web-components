@@ -49,34 +49,26 @@ import "https://resources.developer.clockify.me/validation-widget/latest/clockif
 
 ### Using npm
 
-You can also install the components using npm, which pulls the package from the Gitlab registry. Since this package is private, you need to authenticate with the Gitlab registry before installing it. You can do so by creating a `.npmrc` file in the root of your project with the following content:
+You can also install the components from the public npm registry. No authentication is required.
+
+Install the package like this:
 
 ```bash
-@marketplace:registry=https://git.coingdevelopment.com/api/v4/packages/npm/
-//git.coingdevelopment.com/api/v4/packages/npm/:_authToken=${AUTH_TOKEN}
-```
-
-To get an ```AUTH_TOKEN``` you should have a Developer/Maintainer/Owner role on the ```@marketplace/clockify-web-components``` repository, then you can create a personal Access Token (Preferences > Access Token) with ```api``` or ```read_registry``` scope in your Gitlab account.
-If you have Maintainer/Owner role on the ```@marketplace/clockify-web-components``` repository, you can also use a project Access Token (Settings > Access Tokens), again with ```api``` or ```read_registry``` scope.
-
-Then you can install the package like this:
-
-```bash
-npm install @marketplace/clockify-web-components
+npm install clockify-web-components
 ```
 
 and import the components like this:
 
 ```javascript
-import "@marketplace/clockify-web-components/dist/style.css";
-import "@marketplace/clockify-web-components/dist/components/clockify-project-picker.js";
+import "clockify-web-components/dist/style.css";
+import "clockify-web-components/dist/components/clockify-project-picker.js";
 ```
 
 or import *all* the components like this:
 
 ```javascript
-import "@marketplace/clockify-web-components/dist/style.css";
-import "@marketplace/clockify-web-components/dist/web-components.js";
+import "clockify-web-components/dist/style.css";
+import "clockify-web-components/dist/web-components.js";
 ```
 
 ## Initialization
@@ -84,7 +76,7 @@ import "@marketplace/clockify-web-components/dist/web-components.js";
 Before using any components, you must initialize the library with your configuration. This sets up the authentication token, workspace context, and API endpoints.
 
 ```javascript
-import { ClockifyWebComponentsApp } from "@marketplace/clockify-web-components";
+import { ClockifyWebComponentsApp } from "clockify-web-components";
 
 await ClockifyWebComponentsApp.init({
   token: "YOUR_TOKEN",

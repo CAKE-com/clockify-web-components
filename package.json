@@ -1,5 +1,5 @@
 {
-  "name": "@marketplace/clockify-web-components",
+  "name": "clockify-web-components",
   "version": "1.0.0",
   "type": "module",
   "main": "dist/web-components.js",
@@ -22,7 +22,7 @@
   "author": "Edlir Velaj",
   "description": "A collection of web components to be used in Clockify related products",
   "publishConfig": {
-    "@marketplace/clockify-web-components:registry": "https://git.coingdevelopment.com/api/v4/projects/275/packages/npm/"
+    "access": "public"
   },
   "scripts": {
     "dev": "vite",
