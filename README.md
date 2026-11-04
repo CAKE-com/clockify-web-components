@@ -28,34 +28,34 @@ You can load the components from the CDN or install them via npm.
 
 ### npm (bundler-friendly)
 
-Authenticate to the GitLab registry (private package), then:
+Install from npm:
 
 ```bash
-npm install @marketplace/clockify-web-components
+npm install clockify-web-components
 ```
 
 Import styles and either a single component or the whole bundle:
 
 ```ts
-import "@marketplace/clockify-web-components/dist/style.css";
-import "@marketplace/clockify-web-components/dist/components/clockify-project-picker.js";
+import "clockify-web-components/dist/style.css";
+import "clockify-web-components/dist/components/clockify-project-picker.js";
 // or
-import "@marketplace/clockify-web-components/dist/web-components.js";
+import "clockify-web-components/dist/web-components.js";
 ```
 
 ### Stable import paths
 
 The package's public import contract is:
 
-- `@marketplace/clockify-web-components`
-- `@marketplace/clockify-web-components/dist/style.css`
-- `@marketplace/clockify-web-components/dist/web-components.js`
-- `@marketplace/clockify-web-components/dist/components/clockify-select.js`
-- `@marketplace/clockify-web-components/dist/components/clockify-project-picker.js`
-- `@marketplace/clockify-web-components/dist/components/clockify-custom-fields.js`
-- `@marketplace/clockify-web-components/dist/components/clockify-tags.js`
-- `@marketplace/clockify-web-components/dist/components/clockify-billable.js`
-- `@marketplace/clockify-web-components/dist/components/clockify-description.js`
+- `clockify-web-components`
+- `clockify-web-components/dist/style.css`
+- `clockify-web-components/dist/web-components.js`
+- `clockify-web-components/dist/components/clockify-select.js`
+- `clockify-web-components/dist/components/clockify-project-picker.js`
+- `clockify-web-components/dist/components/clockify-custom-fields.js`
+- `clockify-web-components/dist/components/clockify-tags.js`
+- `clockify-web-components/dist/components/clockify-billable.js`
+- `clockify-web-components/dist/components/clockify-description.js`
 
 These paths are covered by the consumer-app smoke test before release.
 
@@ -64,7 +64,7 @@ These paths are covered by the consumer-app smoke test before release.
 Before using any components, you must initialize the library with your configuration. This sets up the authentication token, workspace context, and API endpoints.
 
 ```javascript
-import { ClockifyWebComponentsApp } from "@marketplace/clockify-web-components";
+import { ClockifyWebComponentsApp } from "clockify-web-components";
 
 await ClockifyWebComponentsApp.init({
   token: "YOUR_TOKEN",

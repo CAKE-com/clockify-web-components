@@ -1,6 +1,6 @@
 # Developer onboarding
 
-This guide is for contributors working on `@marketplace/clockify-web-components`. For consumer installation and component usage, start with [README.md](README.md) and the published docs.
+This guide is for contributors working on `clockify-web-components`. For consumer installation and component usage, start with [README.md](README.md) and the published docs.
 
 ## Project shape
 
@@ -174,15 +174,15 @@ When adding API-backed UI, keep the component responsible for rendering and even
 
 The public import contract for npm consumers is:
 
-- `@marketplace/clockify-web-components` for exported JavaScript APIs such as `ClockifyWebComponentsApp`.
-- `@marketplace/clockify-web-components/dist/style.css` for the shared component stylesheet.
-- `@marketplace/clockify-web-components/dist/web-components.js` for registering the full component bundle.
-- `@marketplace/clockify-web-components/dist/components/clockify-select.js`
-- `@marketplace/clockify-web-components/dist/components/clockify-project-picker.js`
-- `@marketplace/clockify-web-components/dist/components/clockify-custom-fields.js`
-- `@marketplace/clockify-web-components/dist/components/clockify-tags.js`
-- `@marketplace/clockify-web-components/dist/components/clockify-billable.js`
-- `@marketplace/clockify-web-components/dist/components/clockify-description.js`
+- `clockify-web-components` for exported JavaScript APIs such as `ClockifyWebComponentsApp`.
+- `clockify-web-components/dist/style.css` for the shared component stylesheet.
+- `clockify-web-components/dist/web-components.js` for registering the full component bundle.
+- `clockify-web-components/dist/components/clockify-select.js`
+- `clockify-web-components/dist/components/clockify-project-picker.js`
+- `clockify-web-components/dist/components/clockify-custom-fields.js`
+- `clockify-web-components/dist/components/clockify-tags.js`
+- `clockify-web-components/dist/components/clockify-billable.js`
+- `clockify-web-components/dist/components/clockify-description.js`
 
 When adding a component, decide whether it needs both full-bundle export and single-component output. A component that is only exported from `src/index.ts` is available through the full bundle, but not through a `dist/components/...` import.
 
@@ -224,7 +224,7 @@ Release checklist:
 
 The package registry only accepts new versions. If the publish job fails because the version already exists, bump the package version and rerun the release through the normal branch flow.
 
-For consumers, the package is installed from the private `@marketplace` GitLab registry. Use an npm auth token with `read_registry` or equivalent access in the consuming project. Do not commit real tokens; prefer `${AUTH_TOKEN}` placeholders in `.npmrc`.
+For consumers, the package is installed from the public npm registry with `npm install clockify-web-components`; no authentication is required.
 
 ## Troubleshooting
 

@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+# Avoid redundant runs: cancel in-progress runs for the same ref.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build & consumer smoke test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Full history so vite.config.mts `git rev-parse --short HEAD` works.
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # The root package intentionally does not commit a lockfile, so install
+      # from the dependency ranges (mirrors the previous GitLab `npm i -f`).
+      - name: Install dependencies
+        run: npm install -f --no-audit --no-fund
+
+      # Builds the library (and docs via prebuild), packs the tarball, installs
+      # it into a throwaway consumer app, and builds that app. Fails if any of
+      # the published import paths are missing.
+      - name: Build and run consumer smoke test
+        run: npm run test:consumer
