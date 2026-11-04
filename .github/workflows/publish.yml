@@ -1,0 +1,74 @@
+name: Publish Package
+
+# Publishes clockify-web-components to the public npm registry when a
+# GitHub Release is published with a semver tag (v1.2.3).
+#
+# Authentication uses npm OIDC "trusted publishing" (no stored NPM_TOKEN):
+# the `id-token: write` permission lets GitHub mint a short-lived identity
+# that npm trusts, provided a Trusted Publisher is configured on npmjs.com
+# for this package -> repo CAKE-com/clockify-web-components, workflow
+# publish.yml. `--provenance` then attaches a supply-chain attestation.
+#
+# One-time npm-side setup required before the first release:
+#   npmjs.com -> package settings -> Trusted Publisher -> GitHub Actions
+#   org/repo: CAKE-com/clockify-web-components, workflow: publish.yml
+# (This cannot work until the package name is finalized and the trusted
+# publisher is registered by someone with npm account access.)
+
+on:
+  release:
+    types: [published]
+    tags:
+      - "v*.*.*"
+
+jobs:
+  publish:
+    name: Build, smoke test, and publish to npm
+    # Prevent this from running on forks of the repository.
+    if: github.repository == 'CAKE-com/clockify-web-components'
+    runs-on: ubuntu-latest
+    environment: Production
+    permissions:
+      id-token: write # required for npm OIDC trusted publishing + provenance
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Full history so vite.config.mts `git rev-parse --short HEAD` works.
+          fetch-depth: 0
+
+      - name: Extract release version from tag
+        id: vars
+        # refs/tags/v1.2.3 -> v1.2.3
+        run: echo "tag=${GITHUB_REF#refs/*/}" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.x"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Ensure latest npm (required for OIDC trusted publishing)
+        run: npm install -g npm@latest
+
+      - name: Set package version from release tag
+        env:
+          RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
+        # Strip the leading "v" and write the version into package.json so the
+        # published version always matches the release tag (no manual bump /
+        # tag drift). Requires the tag to be of the form vX.Y.Z.
+        run: |
+          version="${RELEASE_VERSION#v}"
+          echo "Publishing version: $version"
+          cat <<< "$(jq -M --arg v "$version" '.version=$v' package.json)" > package.json
+          echo "package.json version is now: $(jq -r .version package.json)"
+
+      - name: Install dependencies
+        run: npm install -f --no-audit --no-fund
+
+      - name: Build and run consumer smoke test
+        run: npm run test:consumer
+
+      - name: Publish to npm (public, with provenance)
+        run: npm publish --provenance --access public
